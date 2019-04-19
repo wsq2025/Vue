@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 条件 -->
+        <p v-if ="items > 10 ">{{items}} 个有现货</p>
+        <p v-else-if = "items > 1 ">所剩不多了，快点买吧</p>
+        <p v-else>没有库存了，请耐心等待</p>
+
+
+        <!-- 影藏DOM节点的两种方式 -->
+        <template v-if = "items > 50">
+            <p>注意事项</p>
+            <p>剩余很多，现在买打八折！</p>
+        </template>
+
+        <p v-show="Ninjia">I am Hide</p>
+        <p v-show="!Ninjia">I am Here</p>
+        <button v-on:click = "Ninjia = !Ninjia ">Ninjia Skills</button>
+    </div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            items:55,
+            Ninjia:true
+        }
+    })
+    </script>
+</body>
+</html>

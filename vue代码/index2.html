@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- title绑定 -->
+    <div v-bind:title="movietitle">
+         电影
+    </div>
+
+    <!-- 事件 -->
+    <button v-on:click="showsomething()">click me</button>
+    <button v-on:click="showanything($event)">click me</button>
+
+    <!-- 阻止事件冒泡到父 -->
+    <div v-on:click="show(1,$event)">
+            <button v-on:click.stop="show(123,$event)">click me</button>
+    </div>
+
+    <!-- 阻止默认事件 -->
+    <a href="http://www.baidu.com" v-on:click.prevent="show(12345,$event)">click me</a>    
+</div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            movietitle:"猫妖传"
+        },
+        methods:{
+
+            showsomething:function(){
+                console.log(event);
+                alert("show some thing!");
+            },
+            showanything:function(event){
+                console.log(event);
+                alert("show any thing!");
+            },
+            show:function(msg,event){
+                console.log(msg);
+                alert("show any thing!");
+            }
+        }
+    })
+    </script>
+</body>
+</html>

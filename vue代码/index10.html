@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <!-- watch 与 computed -->
+
+        <div>{{ num }}</div>
+        <div>{{ fullName }}</div>
+        <div>{{ fullName1 }}</div>
+        <button v-on:click = "changeName">change</button>
+        <button v-on:click = "changeFullName">changeFull</button>
+
+
+        <input type = "text" v-model = "serachInfo">
+        <div v-if="showSerachInfo">正在搜索。。。。</div>
+        <ul>
+            <li v-for = "item in result">{{ item }}</li>
+        </ul>
+
+    </div>
+
+    <script>
+    new Vue ({
+        el:"#app",
+        data:{
+            num:0,
+            firstName:"benwei",
+            lastName:"lu",
+
+            serachInfo:"",
+            showSerachInfo:false,
+            result:[]
+        },
+
+        //computed属性适用于同步处理，监听改变，它所依赖的任何一个变量发生变化时触发
+        computed:{
+            fullName:function(){
+                alert("我执行了");
+                return this.lastName + " " + this.firstName;
+            },
+            fullName1:{
+                get:function(){
+                    alert("get");
+                    return this.lastName + "" + this.firstName;
+                },
+                set:function(newValue){
+                    console.log(newValue);
+                    var arr=newValue.split(" ");
+                    this.lastName=arr[0];
+                    this.firstName=arr[1];
+                }
+
+            }
+        },
+        methods:{
+
+            changeName:function(){
+                this.firstName = "benhuang";
+            },
+            changeFullName:function(){
+                this.fullName1="xiao hong";
+
+            }
+        },
+
+
+        //watch适用于异步处理
+        watch:{
+            serachInfo:function(query){
+                //console.log(query);
+                this.showSerachInfo = true;
+                console.log(this.result);
+                setTimeout(() => {
+                    this.result=["js","css","html"];
+                    this.showSerachInfo=false;
+                }, 500);
+
+                //下面这种方式也可以，先保存vue对象
+                // var vm = this;
+                // setTimeout(function() {
+                //     vm.result=["js","css","html"];
+                //     vm.showSerachInfo=false;
+                // }, 500);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定 -->
+        <input type="text" v-on:keyup.enter.space.esc="keyup">
+        output:{{ msg }}
+        <input type="text" v-on:keyup="keyup">
+        output:{{ msg }}
+
+
+        <!-- 按shift键点击 -->
+        <button v-on:click.shift="shift">sd</button>
+
+        <!-- 表单提交阻止页面刷新  （阻止默认事件） -->
+        <form action="" v-on:submit.prevent="submit($event)">
+            <input type="submit">
+        </form>
+    </div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            msg:"hello"
+
+        },
+        methods:{
+            keyup:function(event){
+                this.msg=event.target.value;
+
+                //alert("you pressed enter!");
+                // if(event.which>=65&&event.which<=90){
+                //     console.log(event);
+                //     alert("you pressed enter!");
+                // }
+            },
+            shift:function(event){
+                alert("shift");
+            },
+            submit:function(event){
+                console.log(event);
+            }
+        }
+
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <article id="article">
+        <h1></h1>
+        <p></p>
+    </article>
+    <!-- es6新特性 -->
+    <script>
+    //一    
+        //1.不能在同一个作用域重复声明一个变量
+        // var a=5;
+        // console.log(a);
+        // var a=6;
+        // console.log(a)
+        // let a=5;
+        // console.log(a);
+        // let a=6;
+        // console.log(a);//报错：Uncaught SyntaxError: Identifier 'a' has already been declared
+
+        //2.let声明的变量不会被预解析
+        // console.log(b);//预解析为undefied
+        // var b=5;
+
+        // console.log(b);//预解析报错：Uncaught ReferenceError: b is not defined
+        // let b=5;
+
+        //3.暂时性死区（变量在let声明前不可访问，为了防止先调用后声明的现象），也就是2中的报错
+
+    //二
+        //var-for 与let-for 区别
+        // var list=document.querySelectorAll("li");
+        // for(var i=0;i<list.length;i++)
+        // {
+        //     list[i].onclick=function(){
+        //         alert(i);//i=4
+        //     }
+        // }
+
+        var list=document.querySelectorAll("li");
+        for(let i=0;i<list.length;i++)
+        {
+            list[i].onclick=function(){
+                alert(i);//i从0开始,let变量只在块作用域
+            }
+        }
+
+    //三
+        //字符串模板的使用 var与let
+        var obj={
+            title : '少女心酸日记',
+            content : '酸菜太酸'
+        }
+
+        // var articleelement = document.getElementById('article');
+        // articleelement.innerHTML='<h1>'+obj.title+'</h1><p>'+obj.content+'</p>';//字符串拼接
+
+        let articleelement = document.getElementById('article');
+        articleelement.innerHTML=`<h1>${obj.title}</h1>
+                                  <p>${obj.content}</p>`;//模板拼接
+
+    //四
+       //箭头函数
+       //1.没有形参
+       var fn_old = function(){
+           console.log("fu");
+       };
+       var fn_new = () => console.log("fu");
+
+       //一个形参
+       var fn_new1 = a => console.log(a);
+       fn_new1("aaa");
+
+       //多个参数
+       var fn_new2 = (b,c) => {
+           console.log(b,c);
+           return b + c;
+       }
+       var sum = fn_new2(2,4);
+       console.log(sum);
+
+    //五
+       //symbol为新增的数据类型，表示独一无二，不用new
+       let d = Symbol("a");
+       let e = Symbol("a");
+       console.log(d,e,d==e);  
+
+       //Set 数据结构，类似数组，自动清除重复数据
+       let set = new Set([1,1,2,3,4,5]);
+       console.log(set);
+       console.log(set.size);//大小
+       console.log(set.add("a"));//增删
+       console.log(set.delete(1));
+       console.log(set.has("a"));//查找，true
+       console.log(set.has("b"));//false
+       console.log(set.clear());//清除数据
+       console.log(set);
+
+       //Map 数据结构，键值对对象，不允许重复
+       var map = new Map([['name','wewef'],['age',24]]);
+       console.log(map);
+       console.log(map.size);
+       console.log(map.set('sex','男'));
+       console.log(map);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <my-component></my-component>
+
+        <my-component1></my-component1>
+        <my-component1></my-component1>
+        <my-component1></my-component1>
+        <my-component1></my-component1>
+
+        <my-component3></my-component3>
+    </div>
+    <div id = "app2">
+        <my-component3></my-component3>
+    </div>
+    <script>
+        //组件中的tempalate必须有一个根节点才能渲染到DOM节点，data 必须是一个函数
+        Vue.component("my-component",{
+            template : `
+            <div>
+            <h1>联系方式</h1>
+            <p>联系我：{{ msg }}}</p>
+            </div>
+            `,
+            data : function(){
+                return {
+                    msg : "123456789"
+                }
+            }
+        })
+
+        Vue.component("my-component1",{
+            template : `
+            <div>
+            <button @click = "clickme">{{ count }}</button>
+            </div>
+            `,
+            data : function(){
+                return {
+                    count : 0
+                }
+            },
+            methods : {
+                clickme : function(){
+                    this.count++
+                }
+            }
+        })
+
+        new Vue({
+            el : "#app"
+        })
+
+        //局部组件,指定范围只能在app2节点下使用
+        var component =  {
+            template : `
+            <div>
+            <h1>联系方式</h1>
+            <p>联系我：{{ msg }}}</p>
+            </div>
+            `,
+            data : function(){
+                return {
+                    msg : "123456789"
+                }
+            }
+        }
+        new Vue({
+            el : "#app2",
+            components : {
+                "my-component3" : component
+            } 
+        })
+    </script>
+</body>
+</html>

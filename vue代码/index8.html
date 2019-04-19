@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<!-- 数据循环 -->
+     <div id = "app">
+         <h1>电影列表</h1>
+         <ul>
+             <li v-for = "item in itmes">{{item}}</li>
+         </ul>
+
+         <h1>电影列表</h1>
+         <ul>
+             <li v-for = "(t,index) in itmes">{{t}}</li>
+         </ul>
+
+
+         <table>
+             <thead>
+                 <td>员工姓名</td>
+                 <td>职位</td>
+                 <td>公司</td>
+                 <td>索引</td>
+             </thead>
+             <tbody>
+                 <tr v-for = "(person, index) in persons">
+                     <td>{{person.name}}</td> 
+                     <td>{{person.title}}</td>
+                     <td>{{company}}</td>
+                     <td>{{index}}</td>
+                 </tr>
+             </tbody>
+         </table>
+
+         <div v-for = "(n,index) in 10">{{n}}|({{index}})</div>
+     </div>
+    <script>
+    new Vue ({
+        el:"#app",
+        data:{
+            itmes:["芳华","我不是药神","至暗时刻"],
+            persons:[{
+
+                name:"liu",
+                title:"javascript"
+            },
+            {
+                name:"li",
+                title:"c#"
+            }],
+            company:"VUE"
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <ul>
+            <li v-for = "n in numbers">{{n}}</li>
+        </ul>
+        <button v-on:click = "changenumber">click</button>
+
+        <!-- 给DOM一个key值，使其为独一无二的DOM：v-bind:key = "person.id" 组数内id需不同 -->
+        <div v-for = "person in persons" v-bind:key = "person.id">
+            {{person.id}}  {{person.name}} <input type="text">
+        </div>
+        <button v-on:click = "add">click me </button>
+        <button v-on:click = "reverse">click me </button>
+
+    </div>
+
+
+    <script>
+    new Vue ({
+        el:"#app",
+        data:{
+            numbers:[1,2,3,4,5],
+            persons:[{
+                id:1,
+                name:"li"
+            },{
+                id:2,
+                name:"liu"
+            },{
+                id:3,
+                name:"wang"
+            }]
+        },
+        methods:{
+            changenumber:function(){
+                //this.numbers[1] = 10;内存地址没有变，所以值不会变
+                Vue.set(this.numbers,1, 10);//需调用vue的方法
+                alert(this.numbers[1]);
+            },
+
+            //push及reverse等方法是在vue内部重写过的，所以可以直接用
+            add:function(){
+                this.persons.push({
+                    id:4,
+                    name:"zhang"
+                })
+            },
+            reverse:function(){
+                this.persons.reverse();//倒置
+            }
+        }
+    })
+    </script>
+</body>
+</html>

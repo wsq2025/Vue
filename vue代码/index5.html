@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{html}}
+        <!-- 慎重使用 -->
+        <div v-html="html"></div>
+
+        {{message}}
+        <button v-on:click="message = 123">click me</button>
+
+        <!-- 只在初始化的时候加载一次，之后不变 -->
+        <div v-once>
+            {{message}}
+        </div>
+        {{message}}
+    </div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            html:"<h1>hello</h1>",
+            message:"55kai"
+        }
+    })
+    </script>
+</body>
+</html>

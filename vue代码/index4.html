@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 双向数据绑定 -->
+        {{value}}
+        <input type="text" v-model="value">
+
+        <input type="text" v-model.trim="value">
+
+        {{typeof(value)}}
+        <input type="text" v-model.number="value">
+        
+        <!-- 输入框失去焦点时绑定 -->
+        <input type="text" v-model.lazy="value">
+    </div>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            value:"hello"
+        }
+    })
+    </script>
+</body>
+</html>
